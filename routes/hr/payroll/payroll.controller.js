@@ -150,7 +150,7 @@ const makePayment = async (req, res) => {
       },
     });
     if (checkPayslip.paymentStatus === "PAID") {
-      return res.status(400).json({ message: "Payslip already paid" });
+      return res.status(400).json({ message: "Fiche de paie déjà payée" });
     }
     const updatedPayslip = await prisma.payslip.update({
       where: {
@@ -174,7 +174,7 @@ const makePayment = async (req, res) => {
         date: new Date(),
         debit_id: 10,
         credit_id: 1,
-        particulars: `Salary paid to ${updatedPayslip.user.firstName} ${updatedPayslip.user.lastName} for the month of ${updatedPayslip.salaryMonth}-${updatedPayslip.salaryYear}`,
+        particulars: `Salaire versé à ${updatedPayslip.user.firstName} ${updatedPayslip.user.lastName} pour le mois de ${updatedPayslip.salaryMonth}-${updatedPayslip.salaryYear}`,
         amount: updatedPayslip.totalPayable,
         type: "salary",
         related_id: updatedPayslip.id,
