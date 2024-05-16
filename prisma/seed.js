@@ -82,13 +82,13 @@ const subAccount = [
 ];
 
 const settings = {
-  company_name: "My Company",
-  address: "My Address",
-  phone: "My Phone",
-  email: "My Email",
+  company_name: "Sai i lama",
+  address: "Etoa Meki",
+  phone: "693972665",
+  email: "contact@sai-i-lama.gmail",
   website: "My Website",
-  footer: "My Footer",
-  tag_line: "My Tag Line",
+  footer: "©2023 sai i lama",
+  tag_line: "votre sante c'est notre interest",
 };
 
 const department = [
@@ -110,27 +110,27 @@ const designation = [
 ];
 
 const employmentStatus = [
-  { name: "Intern", colourValue: "#00FF00", description: "Intern" },
-  { name: "Permenent", colourValue: "#FF0000", description: "Permenent" },
-  { name: "Staff", colourValue: "#FFFF00", description: "Staff" },
-  { name: "Terminated", colourValue: "#00FFFF", description: "Terminated" },
+  { name: "Interne", colourValue: "#00FF00", description: "Intern" },
+  { name: "Permanent", colourValue: "#FF0000", description: "Permenent" },
+  { name: "Stagiaire", colourValue: "#FFFF00", description: "Stagiaire" },
+  { name: "Terminé", colourValue: "#00FFFF", description: "Terminated" },
 ];
 
 const shifts = [
   {
-    name: "Morning",
+    name: "Matin",
     startTime: "1970-01-01T08:00:00.000Z",
     endTime: "1970-01-01T16:00:00.000Z",
     workHour: 8,
   },
   {
-    name: "Evening",
+    name: "Soir",
     startTime: "1970-01-01T16:00:00.000Z",
     endTime: "1970-01-01T00:00:00.000Z",
     workHour: 8,
   },
   {
-    name: "Night",
+    name: "Nuit",
     startTime: "1970-01-01T00:00:00.000Z",
     endTime: "1970-01-01T08:00:00.000Z",
     workHour: 8,
@@ -157,14 +157,14 @@ const leavePolicy = [
 
 const weeklyHoliday = [
   {
-    name: "Saturday-Thursday",
-    startDay: "Saturday",
-    endDay: "Thursday",
+    name: "samedi-jeudi",
+    startDay: "Samedi",
+    endDay: "Jeudi",
   },
   {
-    name: "Sunday-Friday",
-    startDay: "Sunday",
-    endDay: "Friday",
+    name: "Dimanche-Vendredi",
+    startDay: "Dimanche",
+    endDay: "Vendredi",
   },
 ];
 
@@ -172,39 +172,39 @@ const date = new Date();
 
 const publicHoliday = [
   {
-    name: "New Year",
+    name: "Nouvel an",
     date: date,
   },
   {
-    name: "Independence Day",
+    name: "Fête national",
     date: new Date(date.getTime() + 3 * 24 * 60 * 60 * 1000),
   },
   {
-    name: "Christmas",
+    name: "Noël",
     date: new Date(date.getTime() + 9 * 24 * 60 * 60 * 1000),
   },
 ];
 
 const award = [
   {
-    name: "Employee of the Month",
-    description: "Employee who has performed well in the month",
+    name: "L'employé du Mois",
+    description: "Employé qui a bien performé au cours du mois",
   },
   {
-    name: "Employee of the Year",
-    description: "Employee who has performed well in the year",
+    name: "L'employé de l'année",
+    description: "Employé qui a bien performé au cours de l'année",
   },
 ];
 
 const priority = [
   {
-    name: "Low",
+    name: "Faible",
   },
   {
-    name: "Medium",
+    name: "Moyen",
   },
   {
-    name: "High",
+    name: "Haut",
   },
 ];
 
@@ -275,8 +275,8 @@ async function main() {
   const adminHash = await bcrypt.hash("admin", saltRounds);
   await prisma.user.create({
     data: {
-      firstName: "omega",
-      lastName: "solution",
+      firstName: "Pascal",
+      lastName: "Blaise",
       userName: "admin",
       password: adminHash,
       employmentStatusId: 1,
