@@ -82,30 +82,27 @@ const subAccount = [
 ];
 
 const settings = {
-  company_name: "My Company",
-  address: "My Address",
-  phone: "My Phone",
-  email: "My Email",
+  company_name: "sai i lama",
+  address: "Etoa Meki",
+  phone: "693972665",
+  email: "contact@sai-i-lama.gamil",
   website: "My Website",
-  footer: "My Footer",
-  tag_line: "My Tag Line",
+  footer: "©2023 sai i lama",
+  tag_line: "votre sante c'est notre interest",
 };
 
 const department = [
   { name: "IT" },
   { name: "HR" },
-  { name: "Sales" },
   { name: "Marketing" },
-  { name: "Finance" },
-  { name: "Operations" },
   { name: "Customer Support" },
+  { name: "Soin" },
+  { name: "Sale" },
 ];
 
 const designation = [
-  { name: "CEO" },
-  { name: "CTO" },
-  { name: "CFO" },
-  { name: "COO" },
+  { name: "Praticien" },
+  { name: "Commercial" },
   { name: "HR Manager" },
 ];
 
@@ -275,8 +272,8 @@ async function main() {
   const adminHash = await bcrypt.hash("admin", saltRounds);
   await prisma.user.create({
     data: {
-      firstName: "omega",
-      lastName: "solution",
+      firstName: "Gilles",
+      lastName: "Momeni",
       userName: "admin",
       password: adminHash,
       employmentStatusId: 1,

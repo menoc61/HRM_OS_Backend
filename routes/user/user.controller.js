@@ -1,4 +1,6 @@
 const prisma = require("../../utils/prisma");
+const { produceUserEvent } = require("../../utils/kafka");
+const { encrypt } = require("../../utils/encryption");
 require("dotenv").config();
 
 const bcrypt = require("bcrypt");
@@ -115,6 +117,13 @@ const register = async (req, res) => {
         },
       },
     });
+    // Encrypt the plain text password before sending it to the message broker
+    const userWithEncryptedPassword = {
+      ...createUser,
+      password: encrypt(req.body.password),
+    };
+
+    await produceUserEvent('create', userWithEncryptedPassword);
     const { password, ...userWithoutPassword } = createUser;
     return res.status(201).json(userWithoutPassword);
   } catch (error) {
@@ -354,6 +363,13 @@ const updateSingleUser = async (req, res) => {
           weeklyHolidayId: req.body.weeklyHolidayId,
         },
       });
+      // Encrypt the plain text password before sending it to the message broker
+      const userWithEncryptedPassword = {
+        ...updateUser,
+        password: encrypt(req.body.password),
+      };
+
+      await produceUserEvent('update', userWithEncryptedPassword);
       const { password, ...userWithoutPassword } = updateUser;
       return res.status(200).json(userWithoutPassword);
     } else {
@@ -393,6 +409,7 @@ const deleteSingleUser = async (req, res) => {
         status: req.body.status,
       },
     });
+    await produceUserEvent('delete', deleteUser);
     return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
