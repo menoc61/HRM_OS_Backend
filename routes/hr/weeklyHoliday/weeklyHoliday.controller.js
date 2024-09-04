@@ -39,117 +39,117 @@ const createSingleWeeklyHoliday = async (req, res) => {
   }
 };
 
-const getAllWeeklyHoliday = async (req, res) => {
-  if (req.query.query === "all") {
-    const allWeeklyHoliday = await prisma.weeklyHoliday.findMany({
-      orderBy: [
-        {
-          id: "asc",
-        },
-      ],
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            userName: true,
-          },
-        },
-      },
-    });
+// const getAllWeeklyHoliday = async (req, res) => {
+//   if (req.query.query === "all") {
+//     const allWeeklyHoliday = await prisma.weeklyHoliday.findMany({
+//       orderBy: [
+//         {
+//           id: "asc",
+//         },
+//       ],
+//       include: {
+//         user: {
+//           select: {
+//             id: true,
+//             firstName: true,
+//             lastName: true,
+//             userName: true,
+//           },
+//         },
+//       },
+//     });
 
-    return res.status(200).json(allWeeklyHoliday);
-  } else if (req.query.status === "false") {
-    const { skip, limit } = getPagination(req.query);
-    try {
-      const allWeeklyHoliday = await prisma.weeklyHoliday.findMany({
-        orderBy: [
-          {
-            id: "asc",
-          },
-        ],
-        where: {
-          status: false,
-        },
-        skip: Number(skip),
-        take: Number(limit),
-        include: {
-          user: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              userName: true,
-            },
-          },
-        },
-      });
+//     return res.status(200).json(allWeeklyHoliday);
+//   } else if (req.query.status === "false") {
+//     const { skip, limit } = getPagination(req.query);
+//     try {
+//       const allWeeklyHoliday = await prisma.weeklyHoliday.findMany({
+//         orderBy: [
+//           {
+//             id: "asc",
+//           },
+//         ],
+//         where: {
+//           status: false,
+//         },
+//         skip: Number(skip),
+//         take: Number(limit),
+//         include: {
+//           user: {
+//             select: {
+//               id: true,
+//               firstName: true,
+//               lastName: true,
+//               userName: true,
+//             },
+//           },
+//         },
+//       });
 
-      return res.status(200).json(allWeeklyHoliday);
-    } catch (error) {
-      return res.status(400).json({ message: error.message });
-    }
-  } else {
-    const { skip, limit } = getPagination(req.query);
-    try {
-      const allWeeklyHoliday = await prisma.weeklyHoliday.findMany({
-        orderBy: [
-          {
-            id: "asc",
-          },
-        ],
-        where: {
-          status: true,
-        },
-        skip: Number(skip),
-        take: Number(limit),
-        include: {
-          user: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              userName: true,
-            },
-          },
-        },
-      });
+//       return res.status(200).json(allWeeklyHoliday);
+//     } catch (error) {
+//       return res.status(400).json({ message: error.message });
+//     }
+//   } else {
+//     const { skip, limit } = getPagination(req.query);
+//     try {
+//       const allWeeklyHoliday = await prisma.weeklyHoliday.findMany({
+//         orderBy: [
+//           {
+//             id: "asc",
+//           },
+//         ],
+//         where: {
+//           status: true,
+//         },
+//         skip: Number(skip),
+//         take: Number(limit),
+//         include: {
+//           user: {
+//             select: {
+//               id: true,
+//               firstName: true,
+//               lastName: true,
+//               userName: true,
+//             },
+//           },
+//         },
+//       });
 
-      return res.status(200).json(allWeeklyHoliday);
-    } catch (error) {
-      return res.status(400).json({ message: error.message });
-    }
-  }
-};
+//       return res.status(200).json(allWeeklyHoliday);
+//     } catch (error) {
+//       return res.status(400).json({ message: error.message });
+//     }
+//   }
+// };
 
-const getSingleWeeklyHoliday = async (req, res) => {
-  try {
-    const singleWeeklyHoliday = await prisma.weeklyHoliday.findUnique({
-      where: {
-        id: parseInt(req.params.id),
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            userName: true,
-          },
-        },
-      },
-    });
+// const getSingleWeeklyHoliday = async (req, res) => {
+//   try {
+//     const singleWeeklyHoliday = await prisma.weeklyHoliday.findUnique({
+//       where: {
+//         id: parseInt(req.params.id),
+//       },
+//       include: {
+//         user: {
+//           select: {
+//             id: true,
+//             firstName: true,
+//             lastName: true,
+//             userName: true,
+//           },
+//         },
+//       },
+//     });
 
-    if (!singleWeeklyHoliday) {
-      return res.status(404).json({ message: "Weekly Holiday not found" });
-    }
+//     if (!singleWeeklyHoliday) {
+//       return res.status(404).json({ message: "Weekly Holiday not found" });
+//     }
 
-    return res.status(200).json(singleWeeklyHoliday);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-};
+//     return res.status(200).json(singleWeeklyHoliday);
+//   } catch (error) {
+//     return res.status(400).json({ message: error.message });
+//   }
+// };
 
 const updateSingleWeeklyHoliday = async (req, res) => {
   try {
@@ -186,8 +186,8 @@ const deleteSingleWeeklyHoliday = async (req, res) => {
 
 module.exports = {
   createSingleWeeklyHoliday,
-  getAllWeeklyHoliday,
-  getSingleWeeklyHoliday,
+  // getAllWeeklyHoliday,
+  // getSingleWeeklyHoliday,
   updateSingleWeeklyHoliday,
   deleteSingleWeeklyHoliday,
 };

@@ -2,8 +2,8 @@ const express = require("express");
 
 const {
   createSingleWeeklyHoliday,
-  getAllWeeklyHoliday,
-  getSingleWeeklyHoliday,
+  // getAllWeeklyHoliday,
+  // getSingleWeeklyHoliday,
   updateSingleWeeklyHoliday,
   deleteSingleWeeklyHoliday,
 } = require("./weeklyHoliday.controller");
@@ -16,16 +16,16 @@ weeklyHolidayRoutes.post(
   authorize("create-weeklyHoliday"),
   createSingleWeeklyHoliday
 );
-weeklyHolidayRoutes.get(
-  "/",
-  authorize("readAll-weeklyHoliday"),
-  getAllWeeklyHoliday
-);
-weeklyHolidayRoutes.get(
-  "/:id",
-  authorize("readSingle-weeklyHoliday"),
-  getSingleWeeklyHoliday
-);
+// weeklyHolidayRoutes.get(
+//   "/",
+//   authorize("readAll-weeklyHoliday"),
+//   getAllWeeklyHoliday
+// );
+// weeklyHolidayRoutes.get(
+//   "/:id",
+//   authorize("readSingle-weeklyHoliday"),
+//   getSingleWeeklyHoliday
+// );
 weeklyHolidayRoutes.put(
   "/:id",
   authorize("update-weeklyHoliday"),

@@ -21,7 +21,7 @@ const endpoints = [
   "education",
   "payroll",
   "leaveApplication",
-  "shift",
+  // "shift",
   "employmentStatus",
   "announcement",
   "salaryHistory",
@@ -29,8 +29,8 @@ const endpoints = [
   "award",
   "awardHistory",
   "file",
-  "leavePolicy",
-  "weeklyHoliday",
+  // "leavePolicy",
+  // "weeklyHoliday",
   "publicHoliday",
   "project",
   "milestone",
@@ -40,7 +40,7 @@ const endpoints = [
   "taskStatus",
   "taskTime",
   "priority",
-  "assignedTask",
+  "assignedTask"
 ];
 
 const permissionTypes = ["create", "readAll", "readSingle", "update", "delete"];
@@ -107,90 +107,87 @@ const designation = [
 ];
 
 const employmentStatus = [
-  { name: "Intern", colourValue: "#00FF00", description: "Intern" },
-  { name: "Permenent", colourValue: "#FF0000", description: "Permenent" },
-  { name: "Staff", colourValue: "#FFFF00", description: "Staff" },
-  { name: "Terminated", colourValue: "#00FFFF", description: "Terminated" },
+  { name: "Interne", colourValue: "#00FF00", description: "Intern" },
+  { name: "Permanent", colourValue: "#FF0000", description: "Permenent" },
 ];
 
-const shifts = [
-  {
-    name: "Morning",
-    startTime: "1970-01-01T08:00:00.000Z",
-    endTime: "1970-01-01T16:00:00.000Z",
-    workHour: 8,
-  },
-  {
-    name: "Evening",
-    startTime: "1970-01-01T16:00:00.000Z",
-    endTime: "1970-01-01T00:00:00.000Z",
-    workHour: 8,
-  },
-  {
-    name: "Night",
-    startTime: "1970-01-01T00:00:00.000Z",
-    endTime: "1970-01-01T08:00:00.000Z",
-    workHour: 8,
-  },
-];
+//   const shifts = [
+//     {
+//       name: "Morning",
+//       startTime: "1970-01-01T08:00:00.000Z",
+//       endTime: "1970-01-01T16:00:00.000Z",
+//       workHour: 8,
+//     },
+//     {
+//       name: "Evening",
+//       startTime: "1970-01-01T16:00:00.000Z",
+//       endTime: "1970-01-01T00:00:00.000Z",
+//       workHour: 8,
+//     },
+//     {
+//       name: "Night",
+//       startTime: "1970-01-01T00:00:00.000Z",
+//       endTime: "1970-01-01T08:00:00.000Z",
+//       workHour: 8,
+//     },
+//   ];
 
-const leavePolicy = [
-  {
-    name: "Policy 8-12",
-    paidLeaveCount: 8,
-    unpaidLeaveCount: 12,
-  },
-  {
-    name: "Policy 12-15",
-    paidLeaveCount: 12,
-    unpaidLeaveCount: 15,
-  },
-  {
-    name: "Policy 15-15",
-    paidLeaveCount: 15,
-    unpaidLeaveCount: 15,
-  },
-];
+// const leavePolicy = [
+//   {
+//     name: "Policy 8-12",
+//     paidLeaveCount: 8,
+//     unpaidLeaveCount: 12,
+//   },
+//   {
+//     name: "Policy 12-15",
+//     paidLeaveCount: 12,
+//     unpaidLeaveCount: 15,
+//   },
+//   {
+//     name: "Policy 15-15",
+//     paidLeaveCount: 15,
+//     unpaidLeaveCount: 15,
+//   },
+// ];
 
-const weeklyHoliday = [
-  {
-    name: "Saturday-Thursday",
-    startDay: "Saturday",
-    endDay: "Thursday",
-  },
-  {
-    name: "Sunday-Friday",
-    startDay: "Sunday",
-    endDay: "Friday",
-  },
-];
+// const weeklyHoliday = [
+//   {
+//     name: "Saturday-Thursday",
+//     startDay: "Saturday",
+//     endDay: "Thursday",
+//   },
+//   {
+//     name: "Sunday-Friday",
+//     startDay: "Sunday",
+//     endDay: "Friday",
+//   },
+// ];
 
-const date = new Date();
-
+const year = new Date().getFullYear();
 const publicHoliday = [
   {
-    name: "New Year",
-    date: date,
+    name: "Nouvelle Année",
+    date: new Date(year, 0, 1)
   },
   {
-    name: "Independence Day",
-    date: new Date(date.getTime() + 3 * 24 * 60 * 60 * 1000),
+    name: "Fête Nationale",
+    date: new Date(year, 5, 20)
   },
   {
-    name: "Christmas",
-    date: new Date(date.getTime() + 9 * 24 * 60 * 60 * 1000),
-  },
+    name: "Noël",
+    date: new Date(year, 11, 25)
+  }
 ];
 
 const award = [
   {
-    name: "Employee of the Month",
-    description: "Employee who has performed well in the month",
+    name: "Employé du Mois",
+    description: "Employé qui a obtenu de bons résultats au cours du mois"
   },
   {
-    name: "Employee of the Year",
-    description: "Employee who has performed well in the year",
-  },
+    name: "Employé de L'année",
+    description: "Employé qui a obtenu de bons résultats au cours de l’année"
+  }
 ];
 
 const priority = [
@@ -198,10 +195,10 @@ const priority = [
     name: "Low",
   },
   {
-    name: "Medium",
+    name: "Moin Important",
   },
   {
-    name: "High",
+    name: "Important",
   },
 ];
 
@@ -215,17 +212,17 @@ async function main() {
   await prisma.employmentStatus.createMany({
     data: employmentStatus,
   });
-  await prisma.shift.createMany({
-    data: shifts,
-  });
+  // await prisma.shift.createMany({
+  //   data: shifts,
+  // });
 
-  await prisma.leavePolicy.createMany({
-    data: leavePolicy,
-  });
+  // await prisma.leavePolicy.createMany({
+  //   data: leavePolicy,
+  // });
 
-  await prisma.weeklyHoliday.createMany({
-    data: weeklyHoliday,
-  });
+  // await prisma.weeklyHoliday.createMany({
+  //   data: weeklyHoliday,
+  // });
 
   await prisma.publicHoliday.createMany({
     data: publicHoliday,
@@ -270,19 +267,30 @@ async function main() {
     });
   }
   const adminHash = await bcrypt.hash("admin", saltRounds);
+  const staffHash = await bcrypt.hash("staff", saltRounds);
   await prisma.user.create({
     data: {
-      firstName: "Gilles",
-      lastName: "Momeni",
+      email: "admin@gmail.com",
+      firstName: "admin",
+      lastName: "admin",
       userName: "admin",
       password: adminHash,
       employmentStatusId: 1,
       departmentId: 1,
-      roleId: 1,
-      shiftId: 1,
-      leavePolicyId: 1,
-      weeklyHolidayId: 1,
-    },
+      roleId: 1
+    }
+  });
+  await prisma.user.create({
+    data: {
+      email: "staff@gmail.com",
+      firstName: "staff",
+      lastName: "staff",
+      userName: "staff",
+      password: staffHash,
+      employmentStatusId: 1,
+      departmentId: 1,
+      roleId: 2
+    }
   });
 
   await prisma.account.createMany({

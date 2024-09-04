@@ -45,113 +45,113 @@ const createSingleLeavePolicy = async (req, res) => {
   }
 };
 
-const getAllLeavePolicy = async (req, res) => {
-  if (req.query.query === "all") {
-    const allLeavePolicy = await prisma.leavePolicy.findMany({
-      orderBy: [
-        {
-          id: "asc",
-        },
-      ],
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            userName: true,
-          },
-        },
-      },
-    });
+// const getAllLeavePolicy = async (req, res) => {
+//   if (req.query.query === "all") {
+//     const allLeavePolicy = await prisma.leavePolicy.findMany({
+//       orderBy: [
+//         {
+//           id: "asc",
+//         },
+//       ],
+//       include: {
+//         user: {
+//           select: {
+//             id: true,
+//             firstName: true,
+//             lastName: true,
+//             userName: true,
+//           },
+//         },
+//       },
+//     });
 
-    return res.status(200).json(allLeavePolicy);
-  } else if (req.query.status === "false") {
-    const { skip, limit } = getPagination(req.query);
-    try {
-      const allLeavePolicy = await prisma.leavePolicy.findMany({
-        orderBy: [
-          {
-            id: "asc",
-          },
-        ],
-        where: {
-          status: false,
-        },
-        skip: Number(skip),
-        take: Number(limit),
-        include: {
-          user: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              userName: true,
-            },
-          },
-        },
-      });
+//     return res.status(200).json(allLeavePolicy);
+//   } else if (req.query.status === "false") {
+//     const { skip, limit } = getPagination(req.query);
+//     try {
+//       const allLeavePolicy = await prisma.leavePolicy.findMany({
+//         orderBy: [
+//           {
+//             id: "asc",
+//           },
+//         ],
+//         where: {
+//           status: false,
+//         },
+//         skip: Number(skip),
+//         take: Number(limit),
+//         include: {
+//           user: {
+//             select: {
+//               id: true,
+//               firstName: true,
+//               lastName: true,
+//               userName: true,
+//             },
+//           },
+//         },
+//       });
 
-      return res.status(200).json(allLeavePolicy);
-    } catch (error) {
-      return res.status(400).json({ message: error.message });
-    }
-  } else {
-    const { skip, limit } = getPagination(req.query);
-    try {
-      const allLeavePolicy = await prisma.leavePolicy.findMany({
-        orderBy: [
-          {
-            id: "asc",
-          },
-        ],
-        where: {
-          status: true,
-        },
-        skip: Number(skip),
-        take: Number(limit),
-        include: {
-          user: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              userName: true,
-            },
-          },
-        },
-      });
+//       return res.status(200).json(allLeavePolicy);
+//     } catch (error) {
+//       return res.status(400).json({ message: error.message });
+//     }
+//   } else {
+//     const { skip, limit } = getPagination(req.query);
+//     try {
+//       const allLeavePolicy = await prisma.leavePolicy.findMany({
+//         orderBy: [
+//           {
+//             id: "asc",
+//           },
+//         ],
+//         where: {
+//           status: true,
+//         },
+//         skip: Number(skip),
+//         take: Number(limit),
+//         include: {
+//           user: {
+//             select: {
+//               id: true,
+//               firstName: true,
+//               lastName: true,
+//               userName: true,
+//             },
+//           },
+//         },
+//       });
 
-      return res.status(200).json(allLeavePolicy);
-    } catch (error) {
-      return res.status(400).json({ message: error.message });
-    }
-  }
-};
+//       return res.status(200).json(allLeavePolicy);
+//     } catch (error) {
+//       return res.status(400).json({ message: error.message });
+//     }
+//   }
+// };
 
-const getSingeLeavePolicy = async (req, res) => {
-  try {
-    const singleLeavePolicy = await prisma.leavePolicy.findUnique({
-      where: {
-        id: parseInt(req.params.id),
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            userName: true,
-          },
-        },
-      },
-    });
+// const getSingeLeavePolicy = async (req, res) => {
+//   try {
+//     const singleLeavePolicy = await prisma.leavePolicy.findUnique({
+//       where: {
+//         id: parseInt(req.params.id),
+//       },
+//       include: {
+//         user: {
+//           select: {
+//             id: true,
+//             firstName: true,
+//             lastName: true,
+//             userName: true,
+//           },
+//         },
+//       },
+//     });
 
-    return res.status(200).json(singleLeavePolicy);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-};
+//     return res.status(200).json(singleLeavePolicy);
+//   } catch (error) {
+//     return res.status(400).json({ message: error.message });
+//   }
+// };
 
 const updateSingleLeavePolicy = async (req, res) => {
   try {
@@ -188,8 +188,8 @@ const deleteSingleLeavePolicy = async (req, res) => {
 
 module.exports = {
   createSingleLeavePolicy,
-  getAllLeavePolicy,
-  getSingeLeavePolicy,
+  // getAllLeavePolicy,
+  // getSingeLeavePolicy,
   updateSingleLeavePolicy,
   deleteSingleLeavePolicy,
 };

@@ -27,11 +27,6 @@ const generatePayslip = async (req, res) => {
           unpaidLeave: item.unpaidLeave,
           monthlyHoliday: item.monthlyHoliday,
           publicHoliday: item.publicHoliday,
-          workDay: item.workDay,
-          shiftWiseWorkHour: item.shiftWiseWorkHour,
-          monthlyWorkHour: item.monthlyWorkHour,
-          hourlySalary: item.hourlySalary,
-          workingHour: item.workingHour,
           salaryPayable: item.salaryPayable,
           bonus: item.bonus,
           bonusComment: item.bonusComment,
@@ -42,6 +37,7 @@ const generatePayslip = async (req, res) => {
       }),
       skipDuplicates: true,
     });
+    console.log(payslip)
     return res.status(200).json(payslip);
   } catch (error) {
     console.log(error.message);

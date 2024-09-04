@@ -84,29 +84,29 @@ const getAllShift = async (req, res) => {
   }
 };
 
-const getSingleShift = async (req, res) => {
-  try {
-    const singleShift = await prisma.shift.findUnique({
-      where: {
-        id: parseInt(req.params.id),
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            userName: true,
-          },
-        },
-      },
-    });
+// const getSingleShift = async (req, res) => {
+//   try {
+//     const singleShift = await prisma.shift.findUnique({
+//       where: {
+//         id: parseInt(req.params.id),
+//       },
+//       include: {
+//         user: {
+//           select: {
+//             id: true,
+//             firstName: true,
+//             lastName: true,
+//             userName: true,
+//           },
+//         },
+//       },
+//     });
 
-    return res.status(200).json(singleShift);
-  } catch (error) {
-    return res.status(400).json({ message: error.message });
-  }
-};
+//     return res.status(200).json(singleShift);
+//   } catch (error) {
+//     return res.status(400).json({ message: error.message });
+//   }
+// };
 
 const updateSingleShift = async (req, res) => {
   try {
@@ -151,7 +151,7 @@ const deleteSingleShift = async (req, res) => {
 module.exports = {
   createShift,
   getAllShift,
-  getSingleShift,
+  // getSingleShift,
   updateSingleShift,
   deleteSingleShift,
 };

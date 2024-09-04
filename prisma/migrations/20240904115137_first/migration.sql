@@ -17,12 +17,22 @@ CREATE TABLE "user" (
     "employeeId" TEXT,
     "bloodGroup" TEXT,
     "image" TEXT,
+    "maritalstatus" TEXT,
+    "speech" TEXT,
+    "fathername" TEXT,
+    "mothername" TEXT,
+    "emergencyname1" TEXT,
+    "emergencyforename1" TEXT,
+    "emergencyPhone1" TEXT,
+    "emergencylink1" TEXT,
+    "CnpsId" TEXT,
+    "uppername" TEXT,
+    "Category" TEXT,
+    "Birthday" TIMESTAMP(3),
+    "gender" TEXT,
     "employmentStatusId" INTEGER,
     "departmentId" INTEGER,
     "roleId" INTEGER,
-    "shiftId" INTEGER,
-    "leavePolicyId" INTEGER,
-    "weeklyHolidayId" INTEGER,
     "status" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -34,11 +44,13 @@ CREATE TABLE "user" (
 CREATE TABLE "education" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
-    "degree" TEXT NOT NULL,
-    "institution" TEXT NOT NULL,
-    "fieldOfStudy" TEXT NOT NULL,
-    "result" TEXT NOT NULL,
-    "startDate" TIMESTAMP(3) NOT NULL,
+    "degree" TEXT,
+    "institution" TEXT,
+    "qualification" TEXT,
+    "skill" TEXT,
+    "fieldOfStudy" TEXT,
+    "result" TEXT,
+    "startDate" TIMESTAMP(3),
     "endDate" TIMESTAMP(3),
     "status" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -100,25 +112,11 @@ CREATE TABLE "designationHistory" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "designationId" INTEGER NOT NULL,
-    "startDate" TIMESTAMP(3) NOT NULL,
+    "startDate" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "endDate" TIMESTAMP(3),
     "comment" TEXT,
 
     CONSTRAINT "designationHistory_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "shift" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "startTime" TIME NOT NULL,
-    "endTime" TIME NOT NULL,
-    "workHour" DOUBLE PRECISION NOT NULL,
-    "status" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "shift_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -199,11 +197,6 @@ CREATE TABLE "payslip" (
     "unpaidLeave" INTEGER NOT NULL,
     "monthlyHoliday" INTEGER NOT NULL,
     "publicHoliday" INTEGER NOT NULL,
-    "workDay" INTEGER NOT NULL,
-    "shiftWiseWorkHour" DOUBLE PRECISION NOT NULL,
-    "monthlyWorkHour" DOUBLE PRECISION NOT NULL,
-    "hourlySalary" DOUBLE PRECISION NOT NULL,
-    "workingHour" DOUBLE PRECISION NOT NULL,
     "salaryPayable" DOUBLE PRECISION NOT NULL,
     "bonus" DOUBLE PRECISION NOT NULL,
     "bonusComment" TEXT,
@@ -227,32 +220,6 @@ CREATE TABLE "announcement" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "announcement_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "leavePolicy" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "paidLeaveCount" INTEGER NOT NULL,
-    "unpaidLeaveCount" INTEGER NOT NULL,
-    "status" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "leavePolicy_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "weeklyHoliday" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "startDay" TEXT NOT NULL,
-    "endDay" TEXT NOT NULL,
-    "status" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "weeklyHoliday_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -467,22 +434,19 @@ CREATE UNIQUE INDEX "user_phone_key" ON "user"("phone");
 CREATE UNIQUE INDEX "user_employeeId_key" ON "user"("employeeId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "user_CnpsId_key" ON "user"("CnpsId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "designation_name_key" ON "designation"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "employmentStatus_name_key" ON "employmentStatus"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "shift_name_key" ON "shift"("name");
-
--- CreateIndex
 CREATE UNIQUE INDEX "award_name_key" ON "award"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "payslip_userId_salaryMonth_salaryYear_key" ON "payslip"("userId", "salaryMonth", "salaryYear");
-
--- CreateIndex
-CREATE UNIQUE INDEX "leavePolicy_name_key" ON "leavePolicy"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "taskStatus_projectId_name_key" ON "taskStatus"("projectId", "name");
@@ -513,15 +477,6 @@ ALTER TABLE "user" ADD CONSTRAINT "user_departmentId_fkey" FOREIGN KEY ("departm
 
 -- AddForeignKey
 ALTER TABLE "user" ADD CONSTRAINT "user_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "role"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "user" ADD CONSTRAINT "user_shiftId_fkey" FOREIGN KEY ("shiftId") REFERENCES "shift"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "user" ADD CONSTRAINT "user_leavePolicyId_fkey" FOREIGN KEY ("leavePolicyId") REFERENCES "leavePolicy"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "user" ADD CONSTRAINT "user_weeklyHolidayId_fkey" FOREIGN KEY ("weeklyHolidayId") REFERENCES "weeklyHoliday"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "education" ADD CONSTRAINT "education_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
